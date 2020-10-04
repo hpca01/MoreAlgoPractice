@@ -11,7 +11,6 @@ def compute_min_number_of_refills(d, m, stops):
     refills = 0
     stops.insert(0, 0)
     stops.append(d)
-    print("Distance {} Miles per Tank {} Stops {}".format(d, m, stops))
     while index < len(stops)-1:
         last_refill = index
         while ((index < len(stops)-1) and (stops[index + 1] - stops[last_refill] <= m)):
