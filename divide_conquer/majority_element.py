@@ -1,5 +1,5 @@
 # python3
-
+import sys
 
 def majority_element_naive(elements):
     assert len(elements) <= 10 ** 5
@@ -29,7 +29,7 @@ def find_major(seq, l_bound, r_bound):
 
     if counter_1 > (r_bound - l_bound)//2 and l != -1:
         return l
-    elif counter_2 > (r_bound - l_bound//2) and r != -1:
+    elif counter_2 > (r_bound - l_bound)//2 and r != -1:
         return r
     else:
         return -1
@@ -38,11 +38,35 @@ def find_major(seq, l_bound, r_bound):
 def majority_element(elements):
     assert len(elements) <= 10 ** 5
     value = find_major(elements, 0, len(elements))
-    return 1 if value>0 else 0
+    return value
+
+def alternate_majority(elements):
+    elements.sort()
+    if len(elements) % 2 == 0:
+        mid = len(elements)//2
+        possible_majority = elements[mid]
+        if possible_majority == elements[mid-1] and possible_majority == elements[mid+1]:
+            return 1
+        else:
+            return -1
+    elif len(elements) % 2 != 0 :
+        mid = len(elements)//2
+        possible_majority = elements[mid]
+        if possible_majority == elements[mid-1] and possible_majority == elements[mid+1]:
+            return 1
+        else:
+            return -1
 
 
+# if __name__ == '__main__':
+#     input_n = int(input())
+#     input_elements = list(map(int, input().split()))
+#     assert len(input_elements) == input_n
+#     print(majority_element(input_elements))
 if __name__ == '__main__':
-    input_n = int(input())
-    input_elements = list(map(int, input().split()))
-    assert len(input_elements) == input_n
-    print(majority_element(input_elements))
+    input = sys.stdin.read()
+    n, *a = list(map(int, input.split()))
+    if majority_element(a) != -1:
+        print(1)
+    else:
+        print(0)
